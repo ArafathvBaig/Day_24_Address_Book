@@ -11,7 +11,7 @@ public class Address_Book
 	String address;
 	String city;
 	String state;
-	int zip;
+	String zip;
 	long phoneNo;
 	
 	public ArrayList<Contacts>list = new ArrayList<>();
@@ -75,7 +75,7 @@ public class Address_Book
                 this.state=sc.next();
                 C.setState(state);
                 System.out.println("Enter the updated zipcode");
-                this.zip = sc.nextInt();
+                this.zip = sc.nextLine();
                 C.setZip(zip);
                 System.out.println("Enter the updated phoneNumber");
                 this.phoneNo = sc.nextInt();
@@ -111,7 +111,7 @@ public class Address_Book
 		System.out.println("State Name:: ");
 		this.state = sc.nextLine();
 		System.out.println("Zip Code:: ");
-		this.zip = sc.nextInt();
+		this.zip = sc.nextLine();
 		System.out.println("Phone Number:: ");
 		this.phoneNo = sc.nextLong();
 		Contacts person = new Contacts(firstName, lastName, email, address, city, state, zip, phoneNo);
@@ -207,13 +207,41 @@ public class Address_Book
     }
     
 	/**
-	 * sort by first name
+	 * sort by First Name
 	 */
 	public void sortByFirstName() 
 	{
 		Collections.sort(list, Sort.compareFirstName);
 		showAllContacts();
 	}
+
+	/**
+	 * sort by City
+	 */
+	public void sortByCity() 
+	{
+		Collections.sort(list, Sort.compareCity);
+		showAllContacts();
+	}
+
+	/**
+	 * sort by State
+	 */
+	public void sortByState() 
+	{
+		Collections.sort(list, Sort.compareState);
+		showAllContacts();
+	}
+	
+	/**
+	 * sort by Zip Code
+	 */
+	public void sortByZipCode() 
+	{
+		Collections.sort(list, Sort.compareZipCode);
+		showAllContacts();
+	}
+
     
 	public void showAllContacts()
 	{
@@ -269,6 +297,7 @@ public class Address_Book
 		System.out.println("5. Search By City or State");
 		System.out.println("6. Count By City or State");
 		System.out.println("7. Sort By First Name");
+		System.out.println("8. Sort ");
 		System.out.println("Enter Your Choice");
 		int choice = sc.nextInt();
 		while(choice!=0)
@@ -346,6 +375,29 @@ public class Address_Book
 				case 7:
 					address_Book.sortByFirstName();
 					break;
+					
+				case 8:
+					System.out.println("1. Sort By State. "
+									 + "2. Sort By City. "
+									 + "3. Sort By Zip Code. ");
+					int opt = sc.nextInt();
+					if(opt==1)
+					{
+						address_Book.sortByState();
+					}
+					else if(opt==2)
+					{
+						address_Book.sortByCity();
+					}
+					else if(opt==3)
+					{
+						address_Book.sortByZipCode();
+					}
+					else
+					{
+						System.out.println("Wrong Input");
+					}
+					break;
 		
 				default:
 					System.out.println("Wrong InPut");
@@ -367,6 +419,7 @@ public class Address_Book
 			System.out.println("5. Search By City or State");
 			System.out.println("6. Count By City or State");
 			System.out.println("7. Sort By First Name");
+			System.out.println("8. Sort ");
 			System.out.println("Enter Your Choice");
 			choice = sc.nextInt();
 		}
@@ -382,10 +435,10 @@ class Contacts
     private String address = " ";
     private String city = " ";
     private String state = " ";
-    private int zip = 0;
+    private String zip = " ";
     private long phoneNo = 0;
 
-    Contacts(String firstName, String lastName, String email, String address, String city, String state, int zip, long phoneNo) 
+    Contacts(String firstName, String lastName, String email, String address, String city, String state, String zip, long phoneNo) 
     {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -450,11 +503,11 @@ class Contacts
     {
         this.state=state;
     }
-    public int getZip()
+    public String getZip()
     {
         return zip;
     }
-    public void setZip(int zip)
+    public void setZip(String zip)
     {
         this.zip=zip;
     }
